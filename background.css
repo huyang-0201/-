@@ -1,0 +1,185 @@
+/**
+ * AI魔幻世界杯 - 完整画布背景效果
+ * 使用球场全景图作为背景，实现沉浸式体验
+ */
+
+/* ==================== 全局背景设置 ==================== */
+body {
+    /* 世界杯球场全景图 - 从球门后方看球场的纵深图 */
+    background-image: url('https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    /* 移除任何纯色背景 */
+    background-color: transparent !important;
+    /* 确保页面至少占满全屏 */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* 移除旧的遮罩层 */
+body::before {
+    display: none !important;
+}
+
+/* ==================== 导航栏半透明背景 ==================== */
+nav {
+    background-color: rgba(0, 0, 30, 0.8) !important;
+    /* 移除之前的渐变背景 */
+    background-image: none !important;
+    backdrop-filter: blur(10px);
+}
+
+/* ==================== 主内容容器 ==================== */
+.container,
+.features {
+    background-color: rgba(0, 0, 20, 0.65);
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+    backdrop-filter: blur(5px);
+}
+
+/* 首页主视觉区域 */
+.hero {
+    background: rgba(0, 0, 30, 0.5) !important;
+    background-image: none !important;
+    backdrop-filter: blur(5px);
+}
+
+/* ==================== 内容卡片样式 ==================== */
+.feature-card,
+.story-card,
+.schedule-section,
+.intro-section,
+.contact-section {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 每日看点区域 */
+.highlight-section {
+    background: rgba(0, 0, 30, 0.7) !important;
+    backdrop-filter: blur(5px);
+}
+
+/* ==================== 页脚样式 ==================== */
+footer {
+    background-color: rgba(0, 0, 30, 0.8) !important;
+    backdrop-filter: blur(10px);
+}
+
+/* ==================== 文字颜色设置 ==================== */
+/* 页面标题 */
+.page-header h1 {
+    color: #ffd700 !important;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 卡片标题 */
+.feature-card h3,
+.story-card h3,
+.schedule-section h2,
+.contact-section h2,
+.highlight-section h2 {
+    color: #ffd700 !important;
+}
+
+/* 卡片内容文字 */
+.feature-card p,
+.story-card p,
+.intro-section p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 表格文字 */
+.schedule-section table th,
+.schedule-section table td {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.schedule-section table th {
+    background-color: rgba(0, 0, 20, 0.5) !important;
+}
+
+.schedule-section table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.matchup {
+    color: #ffd700 !important;
+}
+
+/* 按钮文字 */
+.btn {
+    color: white !important;
+}
+
+.btn:hover {
+    color: #1a237e !important;
+}
+
+/* 表单文字 */
+.contact-section label {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.contact-section input,
+.contact-section textarea {
+    background-color: rgba(0, 0, 20, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.contact-section input::placeholder,
+.contact-section textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 提交脑洞区域 */
+.submit-section {
+    background: rgba(0, 0, 30, 0.5) !important;
+}
+
+.submit-section h3 {
+    color: #ffd700 !important;
+}
+
+.submit-section p {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 弹窗内容 */
+.modal-content {
+    background-color: rgba(0, 0, 30, 0.95) !important;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.modal-content h3 {
+    color: #ffd700 !important;
+}
+
+.modal-content p {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ==================== 底部球场剪影 ==================== */
+.stadium-silhouette {
+    opacity: 0.1;
+}
+
+/* ==================== 响应式调整 ==================== */
+@media (max-width: 768px) {
+    .container,
+    .features {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}
