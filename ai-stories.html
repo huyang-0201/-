@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI魔幻剧本 - AI魔幻世界杯</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="background.css">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 基础样式 */
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Arial', sans-serif;
+            background-color: transparent;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* 页面内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 故事卡片列表 */
+        .stories-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #ffd700;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .story-card h3 {
+            color: #1a237e;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .story-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.4rem;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+            color: #1a237e;
+            transform: scale(1.03);
+        }
+
+        /* 提交脑洞按钮 */
+        .submit-section {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.1) 0%, rgba(13, 71, 161, 0.1) 100%);
+            border-radius: 12px;
+        }
+
+        .submit-section h3 {
+            color: #1a237e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .submit-section p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h3 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content .btn {
+            min-width: 120px;
+        }
+
+        .story-full-content {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #ddd;
+            color: #555;
+            font-style: italic;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .stories-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AI魔幻世界杯</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="ai-stories.html">AI魔幻剧本</a></li>
+                <li><a href="matchday.html">比赛日信息</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>AI的魔幻剧本</h1>
+            <p>这里不模拟比分，只创造意想不到的足球故事。</p>
+        </div>
+
+        <!-- 故事卡片列表 -->
+        <div class="stories-list">
+            <div class="story-card">
+                <h3>如果梅西加入了少林足球</h3>
+                <p>2026年世界杯前夕，一条震惊足坛的消息传出：梅西宣布将在本届世界杯后，加盟中国某神秘球队。更令人惊讶的是，他的新队友竟是一群身怀绝技的"少林弟子"。</p>
+                <a href="#" class="btn read-story-btn">阅读完整故事</a>
+                <div class="story-full-content">
+                    <p>据AI分析，梅西的盘带技术将与少林"凌波微步"完美融合。在模拟赛中，他场均过人15次，其中7次是对手连球影都没看清。而少林铁头功传人则被安排为球队中锋，AI预测他的头球射门速度可达每小时180公里，堪比高铁。<br><br>
+                    "我最想学的是铁布衫，"梅西在AI生成的模拟采访中笑着说，"这样我就可以在禁区里无所畏惧了。"国际足联对此表示高度关注，正在紧急讨论是否需要修改规则，以应对可能出现的"轻功点球"和"内力任意球"等全新战术。<br><br>
+                    <strong>AI点评：</strong>规则没说不让用内力射门，所以理论上可行。建议各队紧急加练易筋经。</p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <h3>世界杯在火星上踢会怎样？</h3>
+                <p>国际足联宣布，2030年世界杯将在火星奥林匹斯山脚下举行。重力只有地球的38%，球速将突破音障。守门员开大脚可能直接变成环形山。</p>
+                <a href="#" class="btn read-story-btn">阅读完整故事</a>
+                <div class="story-full-content">
+                    <p>最棘手的是：客场球迷需要坐9个月的飞船来加油助威。<br><br>
+                    <strong>AI点评：</strong>梅西的远射在火星上或许能绕星球一圈再进门，建议国际足联提前设置超时规则，防止一颗球踢成卫星。</p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <h3>AI当裁判后的世界杯</h3>
+                <p>2026年，世界杯首次启用AI主裁判。开赛30秒，AI就因"梅西的左脚越位了一根头发丝"吹掉了阿根廷的首个进球。全场嘘声四起。</p>
+                <a href="#" class="btn read-story-btn">阅读完整故事</a>
+                <div class="story-full-content">
+                    <p>第89分钟，AI突然宕机，屏幕上跳出一行字："经计算，足球比赛进球期望值过低，建议双方改为石头剪刀布决胜。"球员们面面相觑，最终在亿万观众的注视下，两队队长在点球点前进行了三局两胜的石头剪刀布大战。<br><br>
+                    <strong>AI点评：</strong>裁判永远是对的，当裁判是AI时，更是双倍正确。建议未来比赛增设"人类裁判上诉委员会"，用来驳回AI的离谱决定。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 提交脑洞区域 -->
+        <div class="submit-section">
+            <h3>有什么疯狂的想法？</h3>
+            <p>告诉我们你的脑洞，让AI帮你实现！</p>
+            <a href="#" class="btn" id="submit-btn">提交你的脑洞</a>
+        </div>
+    </div>
+
+    <!-- 底部球场剪影 -->
+    <div class="stadium-silhouette">
+        <div class="stadium-field">
+            <div class="center-line"></div>
+            <div class="penalty-area"></div>
+            <div class="penalty-area penalty-area-top"></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" title="微博">📱</a>
+            <a href="#" title="微信">💬</a>
+            <a href="#" title="抖音">🎵</a>
+        </div>
+        <div class="copyright">© 2026 AI魔幻世界杯 - 用AI创造无限可能</div>
+    </footer>
+
+    <!-- 弹窗 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3>🎉 感谢你的脑洞！</h3>
+            <p>功能即将上线，敬请期待！</p>
+            <a href="#" class="btn" id="close-modal">确定</a>
+        </div>
+    </div>
+
+    <script>
+        // 阅读故事按钮点击事件
+        document.querySelectorAll('.read-story-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // 找到对应的故事内容区域
+                const content = this.nextElementSibling;
+                // 切换显示/隐藏
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'block';
+                    this.textContent = '收起故事';
+                } else {
+                    content.style.display = 'none';
+                    this.textContent = '阅读完整故事';
+                }
+            });
+        });
+
+        // 提交脑洞按钮点击事件
+        document.getElementById('submit-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('modal').style.display = 'flex';
+        });
+
+        // 关闭弹窗
+        document.getElementById('close-modal').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('modal').style.display = 'none';
+        });
+
+        // 点击弹窗外部关闭弹窗
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- 交互脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
