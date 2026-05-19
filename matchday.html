@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比赛日信息 - AI魔幻世界杯</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="background.css">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 基础样式 */
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Arial', sans-serif;
+            background-color: transparent;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* 页面内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* 赛程表 */
+        .schedule-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+
+        .schedule-section h2 {
+            color: #1a237e;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .matchup {
+            font-weight: bold;
+            color: #1a237e;
+        }
+
+        /* 每日看点区域 */
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.9) 0%, rgba(13, 71, 161, 0.9) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .highlight-section h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .highlight-section p {
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.6rem;
+            background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+            color: #1a237e;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ffb300 0%, #ffa000 100%);
+            transform: scale(1.05);
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            th, td {
+                padding: 0.7rem 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AI魔幻世界杯</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="ai-stories.html">AI魔幻剧本</a></li>
+                <li><a href="matchday.html">比赛日信息</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>比赛日早报</h1>
+            <p>所有时间为北京时间</p>
+        </div>
+
+        <!-- 每日看点区域 -->
+        <div class="highlight-section">
+            <h2>⚽ 今日看点</h2>
+            <p>距离2026世界杯开幕还有不到一个月！揭幕战将在传奇的阿兹特克体育场打响。AI预测：作为东道主，墨西哥队将以至少两球优势赢下开门红。</p>
+        </div>
+
+        <!-- 赛程表 -->
+        <div class="schedule-section">
+            <h2>📅 小组赛赛程</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>日期</th>
+                        <th>时间（北京）</th>
+                        <th>对阵</th>
+                        <th>场馆</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2026年6月11日</td>
+                        <td>21:00</td>
+                        <td class="matchup">墨西哥 vs 待定</td>
+                        <td>墨西哥城 阿兹特克体育场（揭幕战）</td>
+                    </tr>
+                    <tr>
+                        <td>2026年6月12日</td>
+                        <td>03:00</td>
+                        <td class="matchup">加拿大 vs 待定</td>
+                        <td>多伦多 BMO球场</td>
+                    </tr>
+                    <tr>
+                        <td>2026年6月12日</td>
+                        <td>21:00</td>
+                        <td class="matchup">小组赛多场同时进行</td>
+                        <td>多个场地</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 查看完整赛程按钮 -->
+        <div class="btn-container">
+            <a href="https://www.fifa.com/worldcup/" target="_blank" class="btn">查看完整赛程</a>
+        </div>
+    </div>
+
+    <!-- 底部球场剪影 -->
+    <div class="stadium-silhouette">
+        <div class="stadium-field">
+            <div class="center-line"></div>
+            <div class="penalty-area"></div>
+            <div class="penalty-area penalty-area-top"></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" title="微博">📱</a>
+            <a href="#" title="微信">💬</a>
+            <a href="#" title="抖音">🎵</a>
+        </div>
+        <div class="copyright">© 2026 AI魔幻世界杯 - 用AI创造无限可能</div>
+    </footer>
+
+    <script>
+        // 页面加载完成后的动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为表格行添加hover效果（已通过CSS实现）
+            // 可以在这里添加更多交互功能
+        });
+    </script>
+    <!-- 交互脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
