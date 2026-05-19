@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 - AI魔幻世界杯</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="background.css">
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 基础样式 */
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Arial', sans-serif;
+            background-color: transparent;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        /* 页面内容区域 */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        /* 页面标题 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #1a237e;
+            margin-bottom: 1rem;
+        }
+
+        /* 介绍区域 */
+        .intro-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 联系表单区域 */
+        .contact-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-section h2 {
+            color: #1a237e;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #ffd700;
+        }
+
+        /* 表单样式 */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a237e;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1a237e;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+            color: #1a237e;
+            transform: scale(1.05);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-content h3 {
+            color: #1a237e;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content .btn {
+            min-width: 120px;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            padding: 2rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .copyright {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .intro-section,
+            .contact-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">AI魔幻世界杯</div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="ai-stories.html">AI魔幻剧本</a></li>
+                <li><a href="matchday.html">比赛日信息</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>关于我们</h1>
+        </div>
+
+        <!-- 介绍区域 -->
+        <div class="intro-section">
+            <p>AI魔幻世界杯是一个用AI创造全新世界杯体验的网站。我们相信，足球的魅力在于无限可能。</p>
+            <br>
+            <p>在这里，你可以读到AI创作的奇幻足球故事，探索那些从未发生但令人着迷的平行宇宙；你可以获取最新的比赛日资讯，不错过任何一场精彩对决；你还可以参与球迷互动，分享你的热情与创意。</p>
+            <br>
+            <p>2026年世界杯即将到来，让我们一起用AI打开一个充满想象力的足球世界！</p>
+        </div>
+
+        <!-- 联系表单区域 -->
+        <div class="contact-section">
+            <h2>联系我们</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" name="name" placeholder="请输入你的姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" name="email" placeholder="请输入你的邮箱" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">留言</label>
+                    <textarea id="message" name="message" placeholder="请输入你的留言或建议..." required></textarea>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 底部球场剪影 -->
+    <div class="stadium-silhouette">
+        <div class="stadium-field">
+            <div class="center-line"></div>
+            <div class="penalty-area"></div>
+            <div class="penalty-area penalty-area-top"></div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" title="微博">📱</a>
+            <a href="#" title="微信">💬</a>
+            <a href="#" title="抖音">🎵</a>
+        </div>
+        <div class="copyright">© 2026 AI魔幻世界杯 - 用AI创造无限可能</div>
+    </footer>
+
+    <!-- 弹窗 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3>🎉 谢谢你的反馈！</h3>
+            <p>我们已经收到你的留言，感谢你的支持！</p>
+            <a href="#" class="btn" id="close-modal">确定</a>
+        </div>
+    </div>
+
+    <script>
+        // 表单提交事件
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // 显示感谢弹窗
+            document.getElementById('modal').style.display = 'flex';
+            // 重置表单
+            this.reset();
+        });
+
+        // 关闭弹窗
+        document.getElementById('close-modal').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('modal').style.display = 'none';
+        });
+
+        // 点击弹窗外部关闭弹窗
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+    </script>
+    <!-- 交互脚本 -->
+    <script src="script.js"></script>
+</body>
+</html>
